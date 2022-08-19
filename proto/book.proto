@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package = "com.example.adminjsp.rpcservice";
+
+package book;
+
+service BookService {
+    rpc GetBooksByBookName(BookRequest) returns (BookResponse) {}
+}
+
+message BookRequest {
+    string message = 1;
+}
+
+message BookResponse {
+    string message = 1;
+}
