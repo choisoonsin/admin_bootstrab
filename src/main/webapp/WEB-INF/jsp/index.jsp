@@ -37,6 +37,27 @@
       * Author: BootstrapMade.com
       * License: https://bootstrapmade.com/license/
       ======================================================== -->
+      <script>
+
+        document.addEventListener("DOMContentLoaded", function(){
+
+          const dashboard = document.getElementById("rpcdash");
+          console.log(dashboard);
+          dashboard.addEventListener("click", reqRpcData, false);
+
+          function reqRpcData() {
+            fetch('/rpc/dashdash', {
+              method: 'get'
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+          }
+
+        });
+
+        
+      </script>
     </head>
     
     <body>
@@ -510,7 +531,7 @@
       <main id="main" class="main">
     
         <div class="pagetitle">
-          <h1>Dashboard</h1>
+          <a href="#" id="rpcdash"><h1>Dashboard</h1></a>
           <nav>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
