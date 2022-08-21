@@ -32,6 +32,7 @@ public class AdminController {
     @GetMapping("/rpc/{pathValue}")
     @ResponseBody
     public String rpctest(@PathVariable("pathValue") String pathValue) {
+        System.out.println("hey");
         BookResponse res = stub.getBooksByBookName(BookRequest.newBuilder().setMessage(pathValue).build());
 
         return new JsonFormat().printToString(res);

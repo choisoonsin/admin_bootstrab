@@ -37,7 +37,7 @@
       * Author: BootstrapMade.com
       * License: https://bootstrapmade.com/license/
       ======================================================== -->
-      <script>
+      <script type="text/javascript">
 
         document.addEventListener("DOMContentLoaded", function(){
 
@@ -56,7 +56,6 @@
 
         });
 
-        
       </script>
     </head>
     
