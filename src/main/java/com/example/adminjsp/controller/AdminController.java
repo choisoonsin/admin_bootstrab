@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.adminjsp.rpcservice.Book.BookRequest;
 import com.example.adminjsp.rpcservice.Book.BookResponse;
+import com.example.adminjsp.rpcservice.Book.SimpleRequest;
+import com.example.adminjsp.rpcservice.Book.SimpleResponse;
 import com.example.adminjsp.rpcservice.BookServiceGrpc;
 import com.example.adminjsp.rpcservice.BookServiceGrpc.BookServiceBlockingStub;
 import com.googlecode.protobuf.format.JsonFormat;
@@ -29,11 +31,19 @@ public class AdminController {
         return "index";
     }
 
-    @GetMapping("/rpc/{pathValue}")
+    @GetMapping("/rpc/dash")
     @ResponseBody
-    public String rpctest(@PathVariable("pathValue") String pathValue) {
+    public String rpctest() {
         System.out.println("hey");
-        BookResponse res = stub.getBooksByBookName(BookRequest.newBuilder().setMessage(pathValue).build());
+        BookResponse res = stub.getBooksByBookName(BookRequest.newBuilder().setMessage("dashboard").build());
+
+        return new JsonFormat().printToString(res);
+    }
+
+    @GetMapping("/rpc/pythonChart")
+    @ResponseBody
+    public String pythonChart() {
+        SimpleResponse res = stub.execPythonMLModel(SimpleRequest.newBuilder().setMessage("").build());
 
         return new JsonFormat().printToString(res);
     }

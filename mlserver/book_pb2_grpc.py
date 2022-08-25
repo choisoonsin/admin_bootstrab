@@ -19,12 +19,23 @@ class BookServiceStub(object):
                 request_serializer=book__pb2.BookRequest.SerializeToString,
                 response_deserializer=book__pb2.BookResponse.FromString,
                 )
+        self.ExecPythonMLModel = channel.unary_unary(
+                '/book.BookService/ExecPythonMLModel',
+                request_serializer=book__pb2.SimpleRequest.SerializeToString,
+                response_deserializer=book__pb2.SimpleResponse.FromString,
+                )
 
 
 class BookServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def GetBooksByBookName(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ExecPythonMLModel(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_BookServiceServicer_to_server(servicer, server):
                     servicer.GetBooksByBookName,
                     request_deserializer=book__pb2.BookRequest.FromString,
                     response_serializer=book__pb2.BookResponse.SerializeToString,
+            ),
+            'ExecPythonMLModel': grpc.unary_unary_rpc_method_handler(
+                    servicer.ExecPythonMLModel,
+                    request_deserializer=book__pb2.SimpleRequest.FromString,
+                    response_serializer=book__pb2.SimpleResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +78,22 @@ class BookService(object):
         return grpc.experimental.unary_unary(request, target, '/book.BookService/GetBooksByBookName',
             book__pb2.BookRequest.SerializeToString,
             book__pb2.BookResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ExecPythonMLModel(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/book.BookService/ExecPythonMLModel',
+            book__pb2.SimpleRequest.SerializeToString,
+            book__pb2.SimpleResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

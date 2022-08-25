@@ -6,6 +6,15 @@ package book;
 
 service BookService {
     rpc GetBooksByBookName(BookRequest) returns (BookResponse) {}
+    rpc ExecPythonMLModel(SimpleRequest) returns (SimpleResponse) {}
+}
+
+message SimpleRequest {
+    string message = 1;
+}
+
+message SimpleResponse {
+    string message = 2;
 }
 
 message BookRequest {

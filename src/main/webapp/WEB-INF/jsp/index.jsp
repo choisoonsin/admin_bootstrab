@@ -37,22 +37,42 @@
       * Author: BootstrapMade.com
       * License: https://bootstrapmade.com/license/
       ======================================================== -->
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
       <script type="text/javascript">
 
         document.addEventListener("DOMContentLoaded", function(){
 
           const dashboard = document.getElementById("rpcdash");
-          console.log(dashboard);
           dashboard.addEventListener("click", reqRpcData, false);
 
+          const reports = document.getElementById("reports");
+          reports.addEventListener('click', reqSelectChart, false)
+
+          function reqSelectChart() {
+            console.log("clicked")
+            fetch('/rpc/pythonChart', {
+              method: 'get'
+            })
+            .then(response => response.json())
+            .then(data => {
+              const imageDiv = document.createElement("div");
+              imageDiv.innerHTML = data.message;
+              print(imageDiv.nextSibling)
+
+              reports.appendChild(imageDiv);
+            })
+            .catch(err => console.log(err))
+          }
+
           function reqRpcData() {
-            fetch('/rpc/dashdash', {
+            fetch('/rpc/dash', {
               method: 'get'
             })
             .then(response => response.json())
             .then(data => console.log(data))
             .catch(err => console.log(err));
           }
+
 
         });
 
@@ -671,7 +691,9 @@
                     </div>
     
                     <div class="card-body">
+                      <a href="#" id="reports">
                       <h5 class="card-title">Reports <span>/Today</span></h5>
+                    </a>
     
                       <!-- Line Chart -->
                       <div id="reportsChart"></div>
