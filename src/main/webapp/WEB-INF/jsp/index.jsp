@@ -57,8 +57,6 @@
             .then(data => {
               const imageDiv = document.createElement("div");
               imageDiv.innerHTML = data.message;
-              print(imageDiv.nextSibling)
-
               reports.appendChild(imageDiv);
             })
             .catch(err => console.log(err))
